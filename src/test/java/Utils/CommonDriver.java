@@ -1,6 +1,7 @@
 package Utils;
 
-import Pages.LoginPage;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -8,23 +9,16 @@ public class CommonDriver {
 
     public static WebDriver driver;
 
+    @Before
+    public void LoginActions() {
 
-    // Page object initialization
-    LoginPage loginPageObject = new LoginPage();
-
-    public void LoginActions()
-    {
-        // open chrome browser
+        // Launch Chrome browser
         driver = new ChromeDriver();
-
-        // login page object initialization and definition
-
-        loginPageObject.LoginSteps(driver);
 
     }
 
-    public void CloseTestRun()
-    {
+    @After
+    public void CloseTestRun() {
         driver.quit();
 
     }

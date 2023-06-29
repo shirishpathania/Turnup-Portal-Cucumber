@@ -6,11 +6,12 @@ import Pages.TMPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class TMFeatureStepDefinition {
+import static Utils.CommonDriver.driver;
 
-    ChromeDriver driver = new ChromeDriver();
+public class TMFeatureStepDefinition {
 
     LoginPage loginPageObject = new LoginPage();
     HomePage homePageObject = new HomePage();
@@ -22,50 +23,49 @@ public class TMFeatureStepDefinition {
         loginPageObject.LoginSteps(driver);
 
     }
+
     @When("I navigate to time and material page")
     public void i_navigate_to_time_and_material_page() {
 
         homePageObject.GoToTMPage(driver);
 
     }
-    @When("I create a new time and material record")
-    public void i_create_a_new_time_and_material_record() {
 
-        tmPageObject.CreateTM(driver);
+    @When("I create a new time and material record {string} {string} {string} {string}")
+    public void i_create_a_new_time_and_material_record(String code, String typeCode, String description, String price) {
 
-    }
-    @Then("The record should be created successfully")
-    public void the_record_should_be_created_successfully() {
-
-        tmPageObject.CreateTMAssertion(driver);
-        driver.quit();
+        tmPageObject.CreateTM(driver, code, typeCode, description, price);
 
     }
 
-    @When("I edit an existing time and material record '(.*)' '(.*)' '(.*)'")
-    public void i_edit_an_existing_time_and_material_record(String description, String code, String price) {
+    @Then("The record should be created successfully {string} {string} {string} {string}")
+    public void the_record_should_be_created_successfully(String code, String typeCode, String description, String price) {
 
-        tmPageObject.EditTM(driver, description, code, price);
+        tmPageObject.CreateTMAssertion(driver, code, typeCode, description, price);
 
     }
-    @Then("The record should be updated successfully '(.*)' '(.*)' '(.*)'")
-    public void the_record_should_be_updated_successfully(String description, String code, String price) {
 
-        tmPageObject.EditTMAssertion(driver, description, code, price);
-        driver.quit();
+    @When("I edit an existing time and material record {string} {string} {string} {string}")
+    public void i_edit_an_existing_time_and_material_record(String code, String typeCode, String description, String price) {
+
+        tmPageObject.EditTM(driver, code, typeCode, description, price);
+
+    }
+
+    @Then("The record should be updated successfully {string} {string} {string} {string}")
+    public void the_record_should_be_updated_successfully(String code, String typeCode, String description, String price) {
+
+        tmPageObject.EditTMAssertion(driver, code, typeCode, description, price);
 
     }
 
     @When("I delete an existing time and material record")
-    public void IDeleteAnExistingTimeAndMaterialRecord()
-    {
+    public void IDeleteAnExistingTimeAndMaterialRecord() {
         tmPageObject.DeleteTM(driver);
-        driver.quit();
     }
 
-    @Then("The record should be deleted successfully")
-    public void TheRecordShouldBeDeletedSuccessfully()
-    {
-        tmPageObject.DeleteTMAssertion(driver);
+    @Then("The record should be deleted successfully {string} {string} {string}")
+    public void TheRecordShouldBeDeletedSuccessfully(String typeCode, String description, String price) {
+        tmPageObject.DeleteTMAssertion(driver, typeCode, description, price);
     }
 }
