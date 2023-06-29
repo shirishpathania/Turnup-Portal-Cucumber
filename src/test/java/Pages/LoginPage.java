@@ -7,8 +7,7 @@ import org.openqa.selenium.WebElement;
 
 public class LoginPage {
 
-    public void LoginSteps(WebDriver driver)
-    {
+    public void LoginSteps(WebDriver driver) {
 
         // maximise window
         driver.manage().window().maximize();
@@ -16,8 +15,7 @@ public class LoginPage {
         // launch turn up portal
         driver.navigate().to("http://horse.industryconnect.io/Account/Login?ReturnUrl=%2f");
 
-        try
-        {
+        try {
             // identify username textbox and enter valid username
             WebElement userName = driver.findElement(By.id("UserName"));
             userName.sendKeys("hari");
@@ -30,10 +28,8 @@ public class LoginPage {
             WebElement login = driver.findElement(By.xpath("//*[@id='loginForm']/form/div[3]/input[1]"));
             login.click();
 
-        }
-        catch(Exception ex)
-        {
-            Assert.isTrue(1 == 0 , "TurnUp portal page did not launch");
+        } catch (Exception ex) {
+            Assert.isTrue(1 == 0, "TurnUp portal page did not launch");
         }
 
     }

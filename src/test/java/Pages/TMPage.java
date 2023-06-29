@@ -8,8 +8,7 @@ import org.openqa.selenium.WebElement;
 
 public class TMPage {
 
-    public void CreateTM(WebDriver driver)
-    {
+    public void CreateTM(WebDriver driver, String code, String typeCode, String description, String price) {
 
         // Click on create new button
         WebElement createButton = driver.findElement(By.xpath("//*[@id='container']/p/a"));
@@ -17,7 +16,7 @@ public class TMPage {
 
         WaitHelpers.WaitToBeClickable(driver, "xpath", "//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]", 2);
 
-        // Select Material from typecode dropdown
+        // Select Material from type code dropdown
         WebElement typeCodeDropdown = driver.findElement(By.xpath("//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]"));
         typeCodeDropdown.click();
 
@@ -26,35 +25,37 @@ public class TMPage {
         WebElement materialOption = driver.findElement(By.xpath("//*[@id='TypeCode_listbox']/li[1]"));
         materialOption.click();
 
-        // Identify code textbox and enter a code
+        // Identify code text box and enter a code
         WebElement codeTextbox = driver.findElement(By.id("Code"));
-        codeTextbox.sendKeys("Keyboard");
+        codeTextbox.sendKeys(code);
 
-        // Identify description textbox and enter a description
+        // Identify description text box and enter a description
         WebElement descriptionTextbox = driver.findElement(By.id("Description"));
-        descriptionTextbox.sendKeys("Unknown Material");
+        descriptionTextbox.sendKeys(description);
 
-        // Identify price per unit textbox and enter a code
+        // Identify price per unit text box and enter a code
         WebElement priceInputTag = driver.findElement(By.xpath("//*[@id='TimeMaterialEditForm']/div/div[4]/div/span[1]/span/input[1]"));
         priceInputTag.click();
-//        Thread.Sleep(1000);
 
         WebElement pricePerUnit = driver.findElement(By.xpath("//*[@id='Price']"));
         pricePerUnit.clear();
-        pricePerUnit.sendKeys("20");
+        pricePerUnit.sendKeys(price);
 
         // Click on save button
         WebElement saveButton = driver.findElement(By.id("SaveButton"));
         saveButton.click();
 
-//        Thread.Sleep(2000);
-
     }
 
-    public void CreateTMAssertion(WebDriver driver)
-    {
+    public void CreateTMAssertion(WebDriver driver, String code, String typeCode, String description, String price) {
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         // Wait till the last page button is clickable
-        WaitHelpers.WaitToBeVisible(driver, "xpath", "//*[@id='tmsGrid']/div[4]/a[4]/span", 20);
+        WaitHelpers.WaitToBeClickable(driver, "xpath", "//*[@id='tmsGrid']/div[4]/a[4]/span", 20);
 
         // Click on go to last page button
         WebElement goToLastPageButton = driver.findElement(By.xpath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
@@ -67,110 +68,100 @@ public class TMPage {
         WebElement newDescription = driver.findElement(By.xpath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[3]"));
         WebElement newPrice = driver.findElement(By.xpath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[4]"));
 
-        //if (newCode.getText() == "AAA111")
-        //{
-        //    Assert.Pass("New material record created successfully");
-        //}
-        //else
-        //{
-        //    Assert.Fail("Material record hasn't been created");
-        //}
-
         System.out.println(newCode.getText());
-        Assert.isTrue(newCode.getText().contains("Keyboard"), "Material record hasn't been created");
-        Assert.isTrue(newTypeCode.getText().contains("M"), "Material record hasn't been created");
-        Assert.isTrue(newDescription.getText().contains("Unknown Material"), "Material record hasn't been created");
-        Assert.isTrue(newPrice.getText().contains("$20.00"), "Material record hasn't been created");
+        Assert.isTrue(newCode.getText().contains(code), "Material record hasn't been created");
+        Assert.isTrue(newTypeCode.getText().contains(typeCode), "Material record hasn't been created");
+        Assert.isTrue(newDescription.getText().contains(description), "Material record hasn't been created");
+        Assert.isTrue(newPrice.getText().contains(price), "Material record hasn't been created");
     }
 
-    public void EditTM(WebDriver driver, String description, String code, String price)
-    {
+    public void EditTM(WebDriver driver, String code, String typeCode, String description, String price) {
 
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         // Wait till the last page button is clickable
-        //WaitHelpers.WaitToBeClickable(driver, "xpath", "//*[@id='tmsGrid']/div[4]/a[4]", 5);
-//        Thread.Sleep(2000);
+        WaitHelpers.WaitToBeClickable(driver, "xpath", "//*[@id='tmsGrid']/div[4]/a[4]", 5);
 
         // Click on go to last page button
-        WebElement goToLastPageButton2 = driver.findElement(By.xpath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
-        goToLastPageButton2.click();
+        WebElement goToLastPageButton = driver.findElement(By.xpath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
+        goToLastPageButton.click();
 
-        WaitHelpers.WaitToBeVisible(driver, "xpath", "//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[2]", 2);
+        WaitHelpers.WaitToBeVisible(driver, "xpath", "//*[@id='tmsGrid']/div[3]/table/tbody/tr/td[1]", 5);
 
-        WebElement findNewRecord = driver.findElement(By.xpath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[2]"));
-//        Console.Write(findNewRecord.getText());
+        WebElement findNewRecord = driver.findElement(By.xpath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
 
-        if (findNewRecord.getText() == "M")
-        {
+        if (findNewRecord.getText().contains("Keyboard")) {
 
             // Check if material record has been updated
             WebElement editButton = driver.findElement(By.xpath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
             editButton.click();
 
-        }
-        else
-        {
+        } else {
             System.out.println("Record to be edited not found.");
         }
 
-        // update code textbox value
-        WebElement codeTextbox2 = driver.findElement(By.id("Code"));
-        codeTextbox2.clear();
-        codeTextbox2.sendKeys(code);
+        WaitHelpers.WaitToBeClickable(driver, "xpath", "//*[@id='Code']", 5);
+        // update code text box value
+        WebElement codeTextbox = driver.findElement(By.xpath("//*[@id='Code']"));
+        codeTextbox.clear();
+        codeTextbox.sendKeys(code);
 
-        // update description textbox value
-        WebElement descriptionTextbox2 = driver.findElement(By.id("Description"));
-        descriptionTextbox2.clear();
-        descriptionTextbox2.sendKeys(description);
+        // update description text box value
+        WebElement descriptionTextbox = driver.findElement(By.id("Description"));
+        descriptionTextbox.clear();
+        descriptionTextbox.sendKeys(description);
 
-        // update price per unit textbox value
-        WebElement priceInputTag2 = driver.findElement(By.xpath("//*[@id='TimeMaterialEditForm']/div/div[4]/div/span[1]/span/input[1]"));
-        priceInputTag2.click();
-//        Thread.Sleep(1000);
+        // update price per unit text box value
+        WebElement priceInputTag = driver.findElement(By.xpath("//*[@id='TimeMaterialEditForm']/div/div[4]/div/span[1]/span/input[1]"));
+        priceInputTag.click();
 
-        WebElement pricePerUnit2 = driver.findElement(By.xpath("//*[@id='Price']"));
-        pricePerUnit2.clear();
-        pricePerUnit2.click();
-        pricePerUnit2.sendKeys(price);
+        WebElement pricePerUnit = driver.findElement(By.xpath("//*[@id='Price']"));
+        pricePerUnit.clear();
+        priceInputTag.click();
+        pricePerUnit.sendKeys(price);
 
         // Click on save button
-        WebElement saveButton2 = driver.findElement(By.id("SaveButton"));
-        saveButton2.click();
-
-//        Thread.Sleep(5000);
-
+        WebElement saveButton = driver.findElement(By.id("SaveButton"));
+        saveButton.click();
 
     }
 
-    public void EditTMAssertion(WebDriver driver, String description, String code, String price)
-    {
+    public void EditTMAssertion(WebDriver driver, String code, String typeCode, String description, String price) {
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        // Wait till the last page button is clickable
+        WaitHelpers.WaitToBeClickable(driver, "xpath", "//*[@id='tmsGrid']/div[4]/a[4]", 5);
+
         // Click on go to last page button
-        WebElement goToLastPageButton3 = driver.findElement(By.xpath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
-        goToLastPageButton3.click();
+        WebElement goToLastPageButton = driver.findElement(By.xpath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
+        goToLastPageButton.click();
 
         // Check if material record has been updated
         WebElement updatedTypeCode = driver.findElement(By.xpath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
-        WebElement updatedDescription = driver.findElement(By.xpath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
-        WebElement updatedPrice = driver.findElement(By.xpath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
+        WebElement updatedDescription = driver.findElement(By.xpath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[3]"));
+        WebElement updatedPrice = driver.findElement(By.xpath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[4]"));
 
-        //if (updatedCode.getText() == "BBB222")
-        //{
-        //    Assert.Pass("Existing material record updated successfully");
-        //}
-        //else
-        //{
-        //    Assert.Fail("Existing material record hasn't been updated");
-        //}
-
-        Assert.isTrue(updatedTypeCode.getText() == code, "Material record hasn't been created");
-        Assert.isTrue(updatedDescription.getText() == description, "Material record hasn't been created");
-        Assert.isTrue(updatedPrice.getText() == price, "Material record hasn't been created");
+        Assert.isTrue(updatedTypeCode.getText().contains(typeCode), "Material record hasn't been created");
+        Assert.isTrue(updatedDescription.getText().contains(description), "Material record hasn't been created");
+        Assert.isTrue(updatedPrice.getText().contains(price), "Material record hasn't been created");
     }
 
-    public void DeleteTM(WebDriver driver)
-    {
+    public void DeleteTM(WebDriver driver) {
 
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         // Wait till the last page button is clickable
-//        Thread.Sleep(2000);
+        WaitHelpers.WaitToBeClickable(driver, "xpath", "//*[@id='tmsGrid']/div[4]/a[4]", 5);
 
         // Click on go to last page button
         WebElement goToLastPageButton = driver.findElement(By.xpath("//*[@id='tmsGrid']/div[4]/a[4]"));
@@ -183,36 +174,26 @@ public class TMPage {
         WebElement Delete = driver.findElement(By.xpath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[2]"));
         Delete.click();
 
-//        Thread.Sleep(2000);
-
         driver.switchTo().alert().accept();
-//        Thread.Sleep(2000);
-
 
     }
 
-    public void DeleteTMAssertion(WebDriver driver)
-    {
+    public void DeleteTMAssertion(WebDriver driver, String typeCode, String description, String price) {
 
-        driver.navigate().refresh();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         // Check if material record has been updated
         WebElement updatedTypeCode = driver.findElement(By.xpath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
         WebElement updatedDescription = driver.findElement(By.xpath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
         WebElement updatedPrice = driver.findElement(By.xpath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
 
-        //if (updatedCode.getText() == "BBB222")
-        //{
-        //    Assert.Pass("Existing material record updated successfully");
-        //}
-        //else
-        //{
-        //    Assert.Fail("Existing material record hasn't been updated");
-        //}
-
-        Assert.isTrue(updatedTypeCode.getText() != "M", "Material record hasn't been deleted");
-        Assert.isTrue(updatedDescription.getText() != "Known Material", "Material record hasn't been deleted");
-        Assert.isTrue(updatedPrice.getText() != "$10.00", "Material record hasn't been deleted");
+        Assert.isTrue(updatedTypeCode.getText() != typeCode, "Material record hasn't been deleted");
+        Assert.isTrue(updatedDescription.getText() != description, "Material record hasn't been deleted");
+        Assert.isTrue(updatedPrice.getText() != price, "Material record hasn't been deleted");
 
     }
 }

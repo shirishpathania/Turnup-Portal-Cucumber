@@ -15,15 +15,6 @@ public class HomePage extends CommonDriver {
         // navigate to home page and check if user has logged in Successfully
         WebElement helloHari = driver.findElement(By.xpath("//*[@id='logoutForm']/ul/li/a"));
 
-        //if (helloHari.Text == "Hello hari!")
-        //{
-        //    Assert.Pass("login successful, Test passed");
-        //}
-        //else
-        //{
-        //    Assert.Fail("login failed, Test failed");
-        //}
-
         WaitHelpers.WaitToBeVisible(driver, "xpath", "//*[@id='logoutForm']/ul/li/a", 15);
 //        Assert.isTrue(helloHari.getText() == "Hello hari!", "login failed, Test failed");
 
