@@ -180,6 +180,8 @@ public class TMPage {
 
     public void DeleteTMAssertion(WebDriver driver, String typeCode, String description, String price) {
 
+        driver.navigate().refresh();
+
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
