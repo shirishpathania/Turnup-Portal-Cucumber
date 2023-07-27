@@ -9,10 +9,9 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import static Utils.CommonDriver.driver;
-
 public class TMFeatureStepDefinition {
 
+    WebDriver driver = new ChromeDriver();
     LoginPage loginPageObject = new LoginPage();
     HomePage homePageObject = new HomePage();
     TMPage tmPageObject = new TMPage();
