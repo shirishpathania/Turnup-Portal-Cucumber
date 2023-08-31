@@ -3,19 +3,35 @@ package StepDefinitions;
 import Pages.HomePage;
 import Pages.LoginPage;
 import Pages.TMPage;
+import Utils.CommonDriver;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class TMFeatureStepDefinition {
+public class TMFeatureStepDefinition extends CommonDriver {
 
-    WebDriver driver = new ChromeDriver();
+    // WebDriver driver;
     LoginPage loginPageObject = new LoginPage();
     HomePage homePageObject = new HomePage();
     TMPage tmPageObject = new TMPage();
 
+    @Before
+    public void LoginActions() {
+
+        // Launch Chrome browser
+        driver = new ChromeDriver();
+
+    }
+
+    @After
+    public void CloseTestRun() {
+        driver.quit();
+
+    }
     @Given("I logged into turnup portal successfully")
     public void i_logged_into_turnup_portal_successfully() {
 
