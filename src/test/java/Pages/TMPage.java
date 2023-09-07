@@ -1,6 +1,6 @@
 package Pages;
 
-import Utils.WaitHelpers;
+import Utilities.WaitHelpers;
 import dev.failsafe.internal.util.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

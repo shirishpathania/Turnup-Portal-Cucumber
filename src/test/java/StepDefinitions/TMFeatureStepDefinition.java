@@ -3,18 +3,17 @@ package StepDefinitions;
 import Pages.HomePage;
 import Pages.LoginPage;
 import Pages.TMPage;
-import Utils.CommonDriver;
+import Utilities.CommonDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class TMFeatureStepDefinition extends CommonDriver {
 
-    // WebDriver driver;
+//     WebDriver driver;
     LoginPage loginPageObject = new LoginPage();
     HomePage homePageObject = new HomePage();
     TMPage tmPageObject = new TMPage();

@@ -19,13 +19,13 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.10.0</version>
+            <version>4.12.1</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-chrome-driver</artifactId>
-            <version>4.10.0</version>
+            <version>4.12.1</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
         <dependency>
@@ -41,7 +41,6 @@
             <version>7.12.1</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
 </project>

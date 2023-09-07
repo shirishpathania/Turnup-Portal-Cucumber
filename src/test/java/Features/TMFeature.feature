@@ -1,4 +1,4 @@
-Feature: Via turnup portal, user should be able to create time and material records successfully
+Feature: Via turnup portal, user should be able to create, edit and delete time and material records successfully
 
   Scenario Outline: Create time and material record with valid details
     Given I logged into turnup portal successfully
