@@ -1,10 +1,11 @@
 package Pages;
 
 import Utilities.CommonDriver;
-import Utilities.WaitHelpers;
+import Utilities.Wait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 public class HomePage extends CommonDriver {
 
@@ -14,8 +15,8 @@ public class HomePage extends CommonDriver {
         // navigate to home page and check if user has logged in Successfully
         WebElement helloHari = driver.findElement(By.xpath("//*[@id='logoutForm']/ul/li/a"));
 
-        WaitHelpers.WaitToBeVisible(driver, "xpath", "//*[@id='logoutForm']/ul/li/a", 60);
-//        Assert.isTrue(helloHari.getText() == "Hello hari!", "login failed, Test failed");
+        Wait.WaitToBeVisible(driver, "xpath", "//*[@id='logoutForm']/ul/li/a", 60);
+        Assert.assertEquals(helloHari.getText(), "Hello hari!", "login failed, Test failed");
 
         // Click on Administration tab
         WebElement administrationTab = driver.findElement(By.xpath("/html/body/div[3]/div/div/ul/li[5]/a"));

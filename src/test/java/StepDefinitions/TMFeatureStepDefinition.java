@@ -59,17 +59,17 @@ public class TMFeatureStepDefinition extends CommonDriver {
 
     }
 
-    @When("I edit an existing time and material record {string} {string} {string} {string}")
-    public void i_edit_an_existing_time_and_material_record(String code, String typeCode, String description, String price) {
+    @When("I edit an existing time and material record {string} {string} {string} {string} {string} {string} {string} {string}")
+    public void i_edit_an_existing_time_and_material_record(String oldCode, String oldTypeCode, String oldDescription, String oldPrice,String newCode, String newTypeCode, String newDescription, String newPrice) {
 
-        tmPageObject.EditTM(driver, code, typeCode, description, price);
+        tmPageObject.EditTM(driver, oldCode, oldTypeCode, oldDescription, oldPrice, newCode, newTypeCode, newDescription, newPrice);
 
     }
 
     @Then("The record should be updated successfully {string} {string} {string} {string}")
-    public void the_record_should_be_updated_successfully(String code, String typeCode, String description, String price) {
+    public void the_record_should_be_updated_successfully(String newCode, String newTypeCode, String newDescription, String newPrice) {
 
-        tmPageObject.EditTMAssertion(driver, code, typeCode, description, price);
+        tmPageObject.EditTMAssertion(driver, newCode, newTypeCode, newDescription, newPrice);
 
     }
 
@@ -78,8 +78,8 @@ public class TMFeatureStepDefinition extends CommonDriver {
         tmPageObject.DeleteTM(driver);
     }
 
-    @Then("The record should be deleted successfully {string} {string} {string}")
-    public void TheRecordShouldBeDeletedSuccessfully(String typeCode, String description, String price) {
-        tmPageObject.DeleteTMAssertion(driver, typeCode, description, price);
+    @Then("The record should be deleted successfully {string} {string} {string} {string}")
+    public void TheRecordShouldBeDeletedSuccessfully(String code, String typeCode, String description, String price) {
+        tmPageObject.DeleteTMAssertion(driver, code, typeCode, description, price);
     }
 }

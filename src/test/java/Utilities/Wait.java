@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class WaitHelpers {
+public class Wait {
 
     // Generic function to wait for element to be clickable
     public static void WaitToBeClickable(WebDriver driver, String locator, String locatorValue, int seconds) {
