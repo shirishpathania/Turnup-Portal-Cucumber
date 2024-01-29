@@ -24,6 +24,7 @@ public class TMFeatureStepDefinition extends CommonDriver {
         // Launch Chrome browser
         driver = new ChromeDriver();
 
+
     }
 
     @After
@@ -62,7 +63,7 @@ public class TMFeatureStepDefinition extends CommonDriver {
     @When("I edit an existing time and material record {string} {string} {string} {string} {string} {string} {string} {string}")
     public void i_edit_an_existing_time_and_material_record(String oldCode, String oldTypeCode, String oldDescription, String oldPrice,String newCode, String newTypeCode, String newDescription, String newPrice) {
 
-        tmPageObject.EditTM(driver, oldCode, oldTypeCode, oldDescription, oldPrice, newCode, newTypeCode, newDescription, newPrice);
+        tmPageObject.EditTMNew(driver, oldCode, oldTypeCode, oldDescription, oldPrice, newCode, newTypeCode, newDescription, newPrice);
 
     }
 

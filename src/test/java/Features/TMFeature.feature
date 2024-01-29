@@ -19,7 +19,7 @@ Feature: Via turnup portal, user should be able to create, edit and delete time 
 
     Examples:
       | OldCode  | OldTypeCode | OldDescription   | OldPrice | NewCode | NewTypeCode | NewDescription | NewPrice |
-      | Keyboard | M           | Unknown Material | 500      | Mouse   | T           | Known Material | 100      |
+      | Keyboard | M           | Unknown Material | $500.00      | Mouse   | T           | Known Material | 100      |
 
   Scenario Outline: Delete time and material record with valid details
     Given I logged into turnup portal successfully
